@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "404414965730",
+    "project_id": "puneetshop-87ccf",
+    "storage_bucket": "puneetshop-87ccf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404414965730:android:5682f07bbf92317ca77bbb",
+        "android_client_info": {
+          "package_name": "com.example.shoppuneet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404414965730-koo0i4428pb2vj6284o7610l5v3dab8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shoppuneet",
+            "certificate_hash": "487ee334042a9e01bff26df1147f86452e3a379a"
+          }
+        },
+        {
+          "client_id": "404414965730-ogs756uvmpk7t8ohqje7kagu9kt71f78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJxDcIdblXG0UrFv-iX_V-IQ_dfRRCQ4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404414965730-1kqcpf09hl9esu5t32448vo0nj30jtpi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
