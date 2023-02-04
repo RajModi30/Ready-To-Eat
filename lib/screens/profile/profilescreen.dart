@@ -10,6 +10,16 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepOrange,
+      ),
+    );
   }
 }

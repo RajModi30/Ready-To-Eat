@@ -10,6 +10,15 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.deepOrange,
+      ));
   }
 }
