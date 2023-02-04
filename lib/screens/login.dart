@@ -5,9 +5,10 @@ import 'package:email_validator/email_validator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/firebase/auth.dart';
+import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'dart:async';
 
-import 'package:shoppuneet/home/home_screen.dart';
+import 'package:shoppuneet/screens/home/home_screen.dart';
 import 'package:shoppuneet/screens/forgot.dart';
 import 'package:shoppuneet/screens/register.dart';
 
@@ -191,7 +192,7 @@ class _MyLoginState extends State<MyLogin> {
         Timer(
             Duration(seconds: 3),
             () => Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => HomeScreen()))));
+                MaterialPageRoute(builder: ((context) => BottomNavigation()))));
 
         print("success ${authresult.user!.uid}");
       } on FirebaseAuthException catch (error) {

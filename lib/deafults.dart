@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:shoppuneet/firebase/auth.dart';
-// import 'package:shoppuneet/screens/bottomnavigationbar.dart';
+import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shoppuneet/home/home_screen.dart';
+import 'package:shoppuneet/screens/home/home_screen.dart';
 
 
 
@@ -46,8 +46,8 @@ class _GoogleButtonState extends State<GoogleButton> {
             print("already created $uid");
           }
           Navigator.pushReplacement(context,
-              // MaterialPageRoute(builder: ((context) => BottomNavigation())));
-              MaterialPageRoute(builder: ((context) => HomeScreen())));
+              MaterialPageRoute(builder: ((context) => BottomNavigation())));
+              // MaterialPageRoute(builder: ((context) => HomeScreen())));
         } on FirebaseException catch (error) {
           Fluttertoast.showToast(msg: error.code);
         } catch (error) {
