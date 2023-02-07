@@ -19,11 +19,16 @@ class MyRegister extends StatefulWidget {
 class _MyRegisterState extends State<MyRegister> {
 
   TextEditingController nameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passController = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+
+  String password = "";
+  String email = "";
+  String name = "";
+
+  bool _obsecureText = true;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,7 @@ class _MyRegisterState extends State<MyRegister> {
                     Container(
                       margin: EdgeInsets.only(left: 35, right: 35),
                       child: Form(
-                        key: formkey,
+                        key: _formKey,
                         child: Column(
                           children: [
                             TextFormField(
@@ -77,6 +82,11 @@ class _MyRegisterState extends State<MyRegister> {
                                 }
                               },
                               decoration: InputDecoration(
+                                  // prefixIcon : Icon(
+                                  //   Icons.account_circle_outlined,
+                                  //   color: Colors.black54,
+                                  //   size: 30,
+                                  // ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide(
@@ -124,6 +134,11 @@ class _MyRegisterState extends State<MyRegister> {
                                     ),
                                   ),
                                   hintText: "Email",
+                                  // prefixIcon: Icon(
+                                  //   Icons.person_outline,
+                                  //   color: Colors.black54,
+                                  //   size: 30,
+                                  // ),
                                   hintStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -146,8 +161,26 @@ class _MyRegisterState extends State<MyRegister> {
                                 }
                               },
                               style: TextStyle(color: Colors.white),
-                              obscureText: true,
+                              obscureText: _obsecureText,
                               decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obsecureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      setState(
+                                        () {
+                                          _obsecureText = !_obsecureText;
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  // prefixIcon : Icon(
+                                  //   Icons.lock,
+                                  //   color: Colors.black54,
+                                  //   size: 30,
+                                  // ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide(
@@ -236,8 +269,9 @@ class _MyRegisterState extends State<MyRegister> {
     // final user=auth.currentUser;
     // final uid=user!.uid;
 
-    if (formkey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       try {
+        print("registered");
         String _default =
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9OIEewQ6injKiEC0aDlOt3r7Q8Wf7bEeyK_bYtE4wSjcw1QmyHY-dLNM7Vk46Dp82l_o&usqp=CAU";
 
@@ -249,6 +283,7 @@ class _MyRegisterState extends State<MyRegister> {
           'id': uid,
           'name': nameController.text,
           'email': emailController.text.toLowerCase().trim(),
+          'password' : passController.text.trim(),
           'imageurl': _default,
           'createdAt': Timestamp.now()
         }, SetOptions(merge: true));

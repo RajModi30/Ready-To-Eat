@@ -24,7 +24,13 @@ class _MyLoginState extends State<MyLogin> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  final formkey = GlobalKey<FormState>();
+  
+  String password = "";
+  String email = "";
+
+  bool _obsecureText = true;
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +49,7 @@ class _MyLoginState extends State<MyLogin> {
               Container(
                 padding: EdgeInsets.only(left: 35, top: 165),
                 child: Text(
-                  'Welcome\nBack',
+                  'Welcome',
                   style: TextStyle(fontFamily: 'Alex', color: Colors.white, fontSize: 40),
                 ),
               ),
@@ -70,7 +76,13 @@ class _MyLoginState extends State<MyLogin> {
                                 }
                               },
                               style: TextStyle(color: Colors.black),
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
+                                  prefixIcon: Icon(
+                                    Icons.person_outline,
+                                    color: Colors.black54,
+                                    size: 30,
+                                  ),
                                   fillColor: Colors.grey.shade100,
                                   filled: true,
                                   hintText: "Email",
@@ -95,19 +107,38 @@ class _MyLoginState extends State<MyLogin> {
                                 }
                               },
                               style: TextStyle(),
-                              obscureText: true,
+                              obscureText: _obsecureText,
+                              keyboardType: TextInputType.text,
                               decoration: InputDecoration(
-                                  fillColor: Colors.grey.shade100,
-                                  filled: true,
-                                  hintText: "Password",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obsecureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        _obsecureText = !_obsecureText;
+                                      },
+                                    );
+                                  },
+                                ),
+                                prefixIcon : Icon(
+                                  Icons.lock,
+                                  color: Colors.black54,
+                                  size: 30,
+                                ),
+                                fillColor: Colors.grey.shade100,
+                                filled: true,
+                                hintText: "Password",
+                                border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
                             ),
                             SizedBox(
-                              height: 40,
+                              height: 30,
                             ),
-                            Row(
+                          /*  Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -126,9 +157,56 @@ class _MyLoginState extends State<MyLogin> {
                                       )),
                                 )
                               ],
+                            ), */
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width - 60,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  onSignIN();
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.amber[400]),
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.black),
+                                  textStyle: MaterialStateProperty.all(TextStyle(
+                                      fontSize: 20, fontWeight: FontWeight.bold)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(50))),
+                                ),
+                                child: Text("SIGN-IN"),
+                              ),
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    thickness: 4,
+                                    indent: 0,
+                                    endIndent: 5,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                                Text(
+                                  "OR",
+                                  style:
+                                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                    child: Divider(
+                                  thickness: 4,
+                                  indent: 5,
+                                  endIndent: 0,
+                                  color: Colors.black54,
+                                ))
+                              ],
+                            ),
+                            SizedBox(
+                              height: 25,
                             ),
                             GoogleButton(),
                             SizedBox(
@@ -181,7 +259,7 @@ class _MyLoginState extends State<MyLogin> {
   }
 
   void onSignIN() async {
-    if (formkey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       try {
         final authresult = await auth.signInWithEmailAndPassword(
             email: emailController.text.toLowerCase().trim(),
@@ -191,7 +269,7 @@ class _MyLoginState extends State<MyLogin> {
 
         Timer(
             Duration(seconds: 3),
-            () => Navigator.push(context,
+            () => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: ((context) => BottomNavigation()))));
 
         print("success ${authresult.user!.uid}");

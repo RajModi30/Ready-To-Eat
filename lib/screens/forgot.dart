@@ -51,6 +51,11 @@ class Forgot extends StatelessWidget {
                         child: TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person_outline,
+                              color: Colors.black54,
+                              size: 30,
+                            ),
                             hintText: "Enter Email",
                             fillColor: Colors.grey.shade100,
                             border: OutlineInputBorder(
