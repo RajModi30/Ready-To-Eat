@@ -13,12 +13,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        title: Text("Categories",style: TextStyle(color: Colors.black87),),
+        backgroundColor: Colors.amber[300],
         elevation: 0,),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.deepOrange,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(child: Text("This page is Under Construction !! \n Thanks for your support"))
+        ],
+        // width: double.infinity,
+        // height: double.infinity,
+        // color: Colors.deepOrange,
       ));
   }
 }

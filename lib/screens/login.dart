@@ -47,7 +47,7 @@ class _MyLoginState extends State<MyLogin> {
             children: [
               Container(),
               Container(
-                padding: EdgeInsets.only(left: 35, top: 165),
+                padding: EdgeInsets.only(left: 35, top: 200),
                 child: Text(
                   'Welcome',
                   style: TextStyle(fontFamily: 'Alex', color: Colors.white, fontSize: 40),
@@ -160,6 +160,7 @@ class _MyLoginState extends State<MyLogin> {
                             ), */
                             SizedBox(
                               width: MediaQuery.of(context).size.width - 60,
+                              height: MediaQuery.of(context).size.height * 0.05,
                               child: ElevatedButton(
                                 onPressed: () {
                                   onSignIN();

@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "assets/images/slide/sikandar.png",
     "assets/images/slide/MASALA SING.png",
     // "assets/images/home_image2.jpg",
-    // "assets/images/home_image3.jpg",
+    "assets/images/slide/soya products.png",
   ];
   void changeSelected(int index) {
     setState(() {
@@ -225,23 +225,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   }),
             ),
             const SizedBox(
-            height: 20,
+              height: 20,
           ),
           AnimatedSmoothIndicator(
               activeIndex: activeIndex,
               count: s1.length,
               effect: CustomizableEffect(
-                  dotDecoration: const DotDecoration(
-                    color: Colors.black54,
-                    width: 10,
-                    height: 10,
-                  ),
-                  activeDotDecoration: DotDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    width: 20,
-                    height: 20,
-                  ),
-                  activeColorOverride: (i) => colors[i])),
+                dotDecoration: const DotDecoration(
+                  color: Colors.black54,
+                  width: 10,
+                  height: 10,
+                ),
+                activeDotDecoration: DotDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  width: 20,
+                  height: 20,
+                ),
+                activeColorOverride: (i) => colors[i]
+              )
+            ),
+            
           ],
         )
       ),
