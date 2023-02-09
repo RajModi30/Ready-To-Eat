@@ -20,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   File? image;
+  // File? image2;
   String photo = "";
   /* int activeIndex = 0;
   int index = 0;
@@ -29,8 +30,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       selected = index;
     });
-  }*/
+  }*/ 
+  //  drawer mate 
 
+void initState() {
+    // isButton = false;
+    getUserData();
+    // pickImage();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,16 +127,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Center(
               child: Column(
                 children: [
-                  CircleAvatar(
-                    radius: 50,
-                    child: ClipOval(
-                      child: Image.network(
-                        height: 100,
-                        photo,
-                        fit: BoxFit.fill,
-                      ),
+                  image==null?
+                  Container(
+                    // height: MediaQuery.of(context).size.height * 0.05,
+                    // width: MediaQuery.of(context).size.width * 0.15,
+                    height: 100,
+                    width: 100,
+                    
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      // color: Colors.red,
+                      image: DecorationImage(image: NetworkImage(photo), fit: BoxFit.fill)
                     ),
-                  ),
+                  ):CircularProgressIndicator(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.015,
                   ),
@@ -155,12 +166,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.001,
+              height: MediaQuery.of(context).size.height * 0.015,
             ),
-            Text("Tap above to update your profile picture",style: TextStyle(fontSize: 14,color: Colors.grey[400]),),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
+            // Text("Tap above to update your profile picture",style: TextStyle(fontSize: 14,color: Colors.grey[400]),),
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height * 0.02,
+            // ),
             Divider(
               thickness: 3,
               color: Colors.grey[650],
@@ -184,12 +195,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> pickImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageSelect = File(image.path);
+       final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      // if (image == null) return;
+      final imageSelect = File(image!.path);
       this.image = imageSelect;
+      print(image);
       if (user == null) {
-        print("exist");
+        // print("exist");
       } else {
         final ref = FirebaseStorage.instance
             .ref()
@@ -197,9 +209,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // .child(name + '.jpg');
         await ref.putFile(this.image!);
         String url = await ref.getDownloadURL();
+        print(url);
 
         try {
           final user = auth.currentUser!.uid;
+          print("user id=> $user");
           await FirebaseFirestore.instance
               .collection("users")
               .doc(user)
@@ -214,6 +228,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
+  }
+
+  Future<void> getUserData() async {
+    // final uid=GoogleButton().authResult.user
+    // if (user == null) {
+    //   print("user is not exist");
+    // } else {
+      
+      try {
+        final user = auth.currentUser!.uid;
+        final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user)
+            .get();
+        print(user);
+        // id=userDoc.get('id');
+        setState(() {
+          photo = snapshot.get('imageurl');
+          print(photo);
+        });
+      } on FirebaseException catch (error) {
+        Fluttertoast.showToast(msg: error.code);
+      } catch (error) {
+        Fluttertoast.showToast(msg: error.toString());
+      }
+    // }
   }
 
 /*  void signout() async {

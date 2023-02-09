@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shoppuneet">
+    <uses-permission android:name="android.permission.CAMERA" />
    <application
         android:label="Ready to Eat"
         android:name="${applicationName}"
