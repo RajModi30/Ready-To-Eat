@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
+import 'package:shoppuneet/screens/profile/update.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -20,8 +21,10 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   File? image;
+  var name="";
   // File? image2;
   String photo = "";
+  String email = "";
   /* int activeIndex = 0;
   int index = 0;
   int selected = 0;
@@ -33,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }*/ 
   //  drawer mate 
 
-void initState() {
+  void initState() {
     // isButton = false;
     getUserData();
     // pickImage();
@@ -115,28 +118,24 @@ void initState() {
       appBar: AppBar(
         title: Text("Profile",style: TextStyle(color: Colors.black87),),
         // centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.amber.shade300,
         elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 15),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.start, 
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Column(
                 children: [
                   image==null?
                   Container(
-                    // height: MediaQuery.of(context).size.height * 0.05,
-                    // width: MediaQuery.of(context).size.width * 0.15,
                     height: 100,
                     width: 100,
-                    
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      // color: Colors.red,
                       image: DecorationImage(image: NetworkImage(photo), fit: BoxFit.fill)
                     ),
                   ):CircularProgressIndicator(),
@@ -162,31 +161,66 @@ void initState() {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.001,
+                  ),
+                  Text("Tap to change your profile picture",style: TextStyle(fontSize: 14,color: Colors.grey[400]),),
                 ],
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.015,
+              height: MediaQuery.of(context).size.height * 0.024,
             ),
-            // Text("Tap above to update your profile picture",style: TextStyle(fontSize: 14,color: Colors.grey[400]),),
-            // SizedBox(
-            //   height: MediaQuery.of(context).size.height * 0.02,
-            // ),
             Divider(
-              thickness: 3,
+              thickness: 1.2,
               color: Colors.grey[650],
             ),
-            // Text("hello")
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.2,
-              width: double.infinity,
-              child: Center(
-                child: Text("This page is Under Construction !! \n Thanks for your support")
-              )
+            Text("Name : ",style: TextStyle(fontSize: 20),),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.003,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(width: MediaQuery.of(context).size.width * 0.08,),
+                Text(name,style: TextStyle(fontSize: 20,fontFamily: 'BreeSerif',color: Colors.black54),),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.020,
+            ),
+            Text("Email : ",style: TextStyle(fontSize: 20),),
+            Row(
+              children: [
+                SizedBox(width: MediaQuery.of(context).size.width * 0.08,),
+                Text(email,style: TextStyle(fontSize: 20,fontFamily: 'BreeSerif',color: Colors.black54),),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.09,
+            ),
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => UpdateProfile())));
+                }, 
+                style: ElevatedButton.styleFrom(primary: Colors.blueGrey[300]),
+                child: Text('Change Profile',
+                  style: TextStyle(fontSize: 17),)),
+              ],
             )
+            // Container(
+            //   height: MediaQuery.of(context).size.height * 0.2,
+            //   width: double.infinity,
+            //   child: Center(
+            //     child: Text("This page is Under Construction !! \n Thanks for your support")
+            //   )
+            // )
           ],
         ),
       ),
@@ -195,7 +229,8 @@ void initState() {
 
   Future<void> pickImage() async {
     try {
-       final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      //  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+       final image1 = await ImagePicker().pickImage(source: ImageSource.camera);
       // if (image == null) return;
       final imageSelect = File(image!.path);
       this.image = imageSelect;
@@ -205,8 +240,8 @@ void initState() {
       } else {
         final ref = FirebaseStorage.instance
             .ref()
-            .child('userimages');
-            // .child(name + '.jpg');
+            .child('userimages')
+            .child(name + '.jpg');
         await ref.putFile(this.image!);
         String url = await ref.getDownloadURL();
         print(url);
@@ -246,6 +281,8 @@ void initState() {
         // id=userDoc.get('id');
         setState(() {
           photo = snapshot.get('imageurl');
+          name=snapshot.get('name');
+          email = snapshot.get('email');
           print(photo);
         });
       } on FirebaseException catch (error) {
@@ -255,12 +292,24 @@ void initState() {
       }
     // }
   }
-
-/*  void signout() async {
+  
+  void signout() async {
     final googleAccount = GoogleSignIn();
     googleAccount.signOut();
     print("normal email signout $uid");
     await auth.signOut();
     Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => MyLogin())));
-  }*/
+  }
 }
+
+
+/*
+SizedBox(
+              height: MediaQuery.of(context).size.height * 0.019,
+            ),
+            Text(name,style: TextStyle(fontSize: 20,fontFamily: 'BreeSerif'),),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.020,
+            ),
+            Text(email,style: TextStyle(fontSize: 20,fontFamily: 'BreeSerif'),),
+*/

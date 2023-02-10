@@ -1,4 +1,6 @@
 // import 'package:shoppuneet/deafults.dart';
+
+
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -202,6 +204,15 @@ class _MyRegisterState extends State<MyRegister> {
                             SizedBox(
                               height: 40,
                             ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     border: Border.all(color: Colors.black12)
+                            //   ),
+                            //   child: Text("By click on Sign Up botton \nyou agreed our Terms & Conditions",style: TextStyle(color: Colors.black45),),
+                            // ),
+                            // SizedBox(
+                            //   height: 40,
+                            // ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -292,6 +303,8 @@ class _MyRegisterState extends State<MyRegister> {
           msg: "Successfully Registered",
           toastLength: Toast.LENGTH_SHORT,
         );
+
+        Fluttertoast.showToast(msg: "Welcome " + name,toastLength: Toast.LENGTH_LONG);
 
         Timer(
             const Duration(seconds: 3),

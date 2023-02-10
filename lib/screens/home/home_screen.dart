@@ -1,10 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/firebase/auth.dart';
+import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,16 +28,23 @@ class _HomeScreenState extends State<HomeScreen> {
   int activeIndex = 0;
   int index = 0;
   int selected = 0;
+  String photo = "";
+  String email = "";
+  File? image;
+  var name="";
   List<String> s1 = [
     "assets/images/slide/sikandar.png",
     "assets/images/slide/MASALA SING.png",
-    // "assets/images/home_image2.jpg",
     "assets/images/slide/soya products.png",
+    "assets/images/slide/popcorn1.png",
   ];
   void changeSelected(int index) {
     setState(() {
       selected = index;
     });
+  }
+  void initState() {
+    getUserData();
   }
   /*
   @override
@@ -102,8 +116,83 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: ListView(
           children: [
+  /*          SizedBox(
+              width: width * 0.05,
+              height: height * 0.24,
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  image: DecorationImage(image: NetworkImage(photo),)
+                ),
+                child: Column(
+                  children: [
+                    Text(name),
+                    SizedBox(height: height*0.02,),
+                    Text(email)
+                  ],
+                ),
+              ),
+            ),
+            Divider(color: Colors.black45,), 
+  */
+            // DrawerHeader(
+            //   decoration: BoxDecoration(
+            //     // shape: BoxShape.circle,
+            //     // image: photo,
+            //     color: Colors.blue,
+            //   ),
+            //   child: Image(image: NetworkImage(photo)),
+            //   // child: Text('Welcome '+ name + '  !',style: TextStyle(fontFamily: 'BreeSerif',fontSize: 17),),
+            // ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            SizedBox(
+              child: Container(
+                // child: CircleAvatar(
+                //   child: Image(image: NetworkImage(photo)),
+                // ),
+                height: height * 0.20,
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(image: NetworkImage(photo),fit: BoxFit.contain)
+                ),
+              ),
+              // height: height * 0.20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(name,style: TextStyle(fontFamily: 'BreeSerif',fontSize: 20,color: Colors.black54),),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(email,style: TextStyle(fontFamily: 'BreeSerif',fontSize: 17,color: Colors.black54),),
+              ],
+            ),
+            Divider(color: Colors.black45,),
             ListTile(
               selected: selected == 0,
+              leading: const Icon(Icons.person),
+              title: const Text(
+                "Home",
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              onTap: () {
+                // changeSelected(0);
+                // Navigator.push(context,
+                //   MaterialPageRoute(builder: (context) => BottomNavigation()));
+            }),
+            Divider(color: Colors.black45,),
+            ListTile(
+              selected: selected == 1,
               leading: const Icon(Icons.person),
               title: const Text(
                 "Profile",
@@ -112,12 +201,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: () {
-                changeSelected(0);
+                changeSelected(1);
                 Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProfileScreen()));
             }),
+            Divider(color: Colors.black45,),
             ListTile(
-              selected: selected == 1,
+              selected: selected == 2,
               leading: const Icon(Icons.shopping_bag_outlined),
               title: const Text(
                 "Orders",
@@ -125,10 +215,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 15,
                 ),
               ),
-              onTap: (() => changeSelected(1))
+              onTap: (() => changeSelected(2))
             ),
+            Divider(color: Colors.black45,),
             ListTile(
-              selected: selected == 2,
+              selected: selected == 3,
               leading: const Icon(Icons.info_outline),
               title: const Text(
                 "About",
@@ -136,10 +227,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 15,
                 ),
               ),
-              onTap: (() => changeSelected(2))
+              onTap: (() => changeSelected(3))
             ),
+            Divider(color: Colors.black45,),
             ListTile(
-              selected: selected == 3,
+              selected: selected == 4,
               leading: const Icon(Icons.help_outline),
               title: const Text(
                 "Help",
@@ -148,22 +240,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: () {
-                changeSelected(3);
+                changeSelected(4);
               },
             ),
+            Divider(color: Colors.black45,),
             ListTile(
-                selected: selected == 4,
-                leading: const Icon(Icons.logout_rounded),
-                title: const Text(
-                  "Logout",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
+              selected: selected == 5,
+              leading: const Icon(Icons.logout_rounded),
+              title: const Text(
+                "Logout",
+                style: TextStyle(
+                  fontSize: 15,
                 ),
-                onTap: () {
-                  changeSelected(4);
-                  signout();
-                })
+              ),
+              onTap: () {
+                changeSelected(5);
+                signout();
+              }
+            ),
+            Divider(color: Colors.black45,),
           ],
         ),
         ),
@@ -259,6 +354,70 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => MyLogin())));
   }
 
+  Future<void> pickImage() async {
+    try {
+       final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      // if (image == null) return;
+      final imageSelect = File(image!.path);
+      this.image = imageSelect;
+      print(image);
+      if (user == null) {
+        // print("exist");
+      } else {
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('userimages')
+            .child(name + '.jpg');
+        await ref.putFile(this.image!);
+        String url = await ref.getDownloadURL();
+        print(url);
+
+        try {
+          final user = auth.currentUser!.uid;
+          print("user id=> $user");
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(user)
+              .update({"imageurl": url});
+          // getUserData();
+        } on FirebaseException catch (error) {
+          print(error.code);
+        }
+      }
+    } on PlatformException catch (e) {
+      Fluttertoast.showToast(msg: e.code);
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    }
+  }
+
+  Future<void> getUserData() async {
+    // final uid=GoogleButton().authResult.user
+    // if (user == null) {
+    //   print("user is not exist");
+    // } else {
+      
+      try {
+        final user = auth.currentUser!.uid;
+        final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user)
+            .get();
+        print(user);
+        // id=userDoc.get('id');
+        setState(() {
+          photo = snapshot.get('imageurl');
+          name=snapshot.get('name');
+          email = snapshot.get('email');
+          print(photo);
+        });
+      } on FirebaseException catch (error) {
+        Fluttertoast.showToast(msg: error.code);
+      } catch (error) {
+        Fluttertoast.showToast(msg: error.toString());
+      }
+    // }
+  }
 }
 
 final colors = [

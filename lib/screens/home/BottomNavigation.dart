@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shoppuneet/screens/category/categoryscreen.dart';
 import 'package:shoppuneet/screens/home/home_screen.dart';
-import 'package:shoppuneet/screens/profile/profilescreen.dart';
+// import 'package:shoppuneet/screens/profile/profilescreen.dart';
+import 'package:shoppuneet/screens/settings.dart';
 
 
 class BottomNavigation extends StatefulWidget {
@@ -12,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigation extends State<BottomNavigation> {
-  final screens = [HomeScreen(), CategoryScreen(), ProfileScreen()];
+  final screens = [HomeScreen(), CategoryScreen(), SettingPage()];
   int currentIndex = 0;
 
   @override
@@ -38,8 +39,8 @@ class _BottomNavigation extends State<BottomNavigation> {
                   backgroundColor: Colors.blue),
                   
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person_sharp),
-                  label: "Profile",
+                  icon: Icon(Icons.settings),
+                  label: "Settings",
                   backgroundColor: Colors.blue),
             ]));
   }

@@ -110,9 +110,13 @@ flutter:
         - asset: assets/fonts/Yellowfonts.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-    - family: sarina
+    - family: Courgette
       fonts:
-        - asset: assets/fonts/Sarina.ttf
+        - asset: assets/fonts/Courgette.ttf
+        #BreeSerif
+    - family: BreeSerif
+      fonts:
+        - asset: assets/fonts/BreeSerif.ttf
     - family: Athletic
       fonts:
         - asset: assets/fonts/Athletic.ttf
