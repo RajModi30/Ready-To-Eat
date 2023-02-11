@@ -38,11 +38,28 @@ class Forgot extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(height: 50),
-                    Image.asset(
-                      'assets/images/pgu design.png',
-                      width: 300,
+                    // Container(
+                    //   // decoration : BoxDecoration(
+                    //   //   image: DecorationImage(image: AssetImage('assets/images/ready to eat.png'),fit: BoxFit.contain)
+                    //   // )
+                    //   child: Image(image: AssetImage('assets/images/ready to eat.png')),
+                    // ),
+                    // Container(
+                    //   height: 120,
+                    //   width: 120,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(50),
+                    //     image: DecorationImage(image: AssetImage('assets/images/ready to eat.png'), fit: BoxFit.contain)
+                    //   ),
+                    // ),
+                    CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: ClipOval(
+                        child: Image.asset('assets/images/ready to eat.png',fit: BoxFit.fill,),
+                      ),
+                      radius: 71.58,
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 00.2,),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
                       child: Form(

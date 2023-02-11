@@ -56,7 +56,7 @@ dependencies:
 
 
 flutter_icons: 
-  image_path : "assets/images/logo.png"
+  image_path : "assets/images/ready to eat.png"
   # image_path_android : "assets/images/newicon.png"
   android : true
 

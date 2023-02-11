@@ -147,22 +147,15 @@ class _HomeScreenState extends State<HomeScreen> {
             //   // child: Text('Welcome '+ name + '  !',style: TextStyle(fontFamily: 'BreeSerif',fontSize: 17),),
             // ),
             SizedBox(
-              height: height * 0.01,
+              height: height * 0.04,
             ),
-            SizedBox(
-              child: Container(
-                // child: CircleAvatar(
-                //   child: Image(image: NetworkImage(photo)),
-                // ),
-                height: height * 0.20,
-                decoration: BoxDecoration(
-                  color: Colors.amber,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(image: NetworkImage(photo),fit: BoxFit.contain)
-                ),
+            CircleAvatar(
+              child: ClipOval(
+                child: Image.network(photo,fit: BoxFit.cover,),
               ),
-              // height: height * 0.20,
+              radius: 48,
             ),
+            SizedBox(height: height * 0.01,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -351,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
     googleAccount.signOut();
     print("normal email signout $uid");
     await auth.signOut();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => MyLogin())));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MyLogin()));
   }
 
   Future<void> pickImage() async {

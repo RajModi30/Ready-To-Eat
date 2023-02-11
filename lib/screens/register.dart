@@ -77,8 +77,8 @@ class _MyRegisterState extends State<MyRegister> {
                                   return "Enter name";
                                 } else if (!RegExp(r'[\a-zA-Z]+$').hasMatch(value)) {
                                   return "Enter valid name";
-                                } else if (value.length < 8 || value.length > 20) {
-                                  return "Enter the name between 8 to 20 letters";
+                                } else if (value.length < 6 || value.length > 20) {
+                                  return "Enter the name between 6 to 20 letters";
                                 } else {
                                   return null;
                                 }
@@ -238,31 +238,7 @@ class _MyRegisterState extends State<MyRegister> {
                             SizedBox(
                               height: 40,
                             ),
-                            // GoogleButton(),
-                            // SizedBox(
-                            //   height: 40,
-                            // ),
-                    /*        Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, 'MyLogin');
-                                    // Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Sign In',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.white,
-                                        fontSize: 18),
-                                  ),
-                                  style: ButtonStyle(),
-                                ),
-                              ],
-                            )
-                    */      ],
+                          ],
                         ),
                       ),
                     )
@@ -304,7 +280,7 @@ class _MyRegisterState extends State<MyRegister> {
           toastLength: Toast.LENGTH_SHORT,
         );
 
-        Fluttertoast.showToast(msg: "Welcome " + name,toastLength: Toast.LENGTH_LONG);
+        Fluttertoast.showToast(msg: "Welcome " + name + " !!",toastLength: Toast.LENGTH_LONG);
 
         Timer(
             const Duration(seconds: 3),
