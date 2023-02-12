@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shoppuneet/firebase/auth.dart';
-import 'package:shoppuneet/screens/home/BottomNavigation.dart';
+// import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/home/home_screen.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: MyLogin()
-      home: user == null ? MyLogin() : BottomNavigation() 
+      home: user == null ? MyLogin() : HomeScreen() 
     );
   }
 }

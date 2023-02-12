@@ -44,6 +44,11 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Settings",style: TextStyle(color: Colors.black87),),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.amber.shade300,
+        elevation: 0,),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

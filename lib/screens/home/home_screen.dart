@@ -12,10 +12,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:shoppuneet/screens/category/categoryscreen.dart';
-import 'package:shoppuneet/screens/home/BottomNavigation.dart';
+// import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../settings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -183,10 +185,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: () {
+                // return const HomeScreen();
                 // changeSelected(0);
                 // Navigator.push(context,
                 //   MaterialPageRoute(builder: (context) => BottomNavigation()));
-            }),
+              },
+              trailing: Icon(
+                  Icons.arrow_forward_ios, 
+                  color: Colors.black
+                ),
+            ),
             Divider(color: Colors.black45,),
             ListTile(
               selected: selected == 1,
@@ -201,7 +209,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 changeSelected(1);
                 Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProfileScreen()));
-            }),
+              },
+              trailing: Icon(
+                  Icons.arrow_forward_ios, 
+                  color: Colors.black
+                ),
+            ),
             Divider(color: Colors.black45,),
             ListTile(
               selected: selected == 2,
@@ -212,19 +225,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 15,
                 ),
               ),
-              onTap: (() => changeSelected(2))
+              onTap: (() => changeSelected(2)),
+              trailing: Icon(
+                  Icons.arrow_forward_ios, 
+                  color: Colors.black
+                ),
             ),
             Divider(color: Colors.black45,),
             ListTile(
               selected: selected == 3,
-              leading: const Icon(Icons.info_outline),
+              leading: const Icon(Icons.settings),
               title: const Text(
-                "About",
+                "Settings",
                 style: TextStyle(
                   fontSize: 15,
                 ),
               ),
-              onTap: (() => changeSelected(3))
+              onTap: (() {
+                changeSelected(3);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SettingPage()));
+              }),
+              trailing: Icon(
+                  Icons.arrow_forward_ios, 
+                  color: Colors.black
+                ),
             ),
             Divider(color: Colors.black45,),
             ListTile(
@@ -239,9 +263,17 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 changeSelected(4);
               },
+              trailing: Icon(
+                  Icons.arrow_forward_ios, 
+                  color: Colors.black
+                ),
             ),
             Divider(color: Colors.black45,),
             ListTile(
+              trailing: Icon(
+                  Icons.arrow_forward_ios, 
+                  color: Colors.black
+                ),
               selected: selected == 5,
               leading: const Icon(Icons.logout_rounded),
               title: const Text(

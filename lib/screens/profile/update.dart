@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shoppuneet/firebase/auth.dart';
-import 'package:shoppuneet/screens/home/BottomNavigation.dart';
+// import 'package:shoppuneet/screens/home/BottomNavigation.dart';
+import 'package:shoppuneet/screens/home/home_screen.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({super.key});
@@ -106,7 +107,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     updateUserData();
                     print("clicked");
                     Navigator.push(
-                      context, MaterialPageRoute( builder: (context) => BottomNavigation())
+                      context, MaterialPageRoute( builder: (context) => HomeScreen())
                     );
                   }
                   : null,

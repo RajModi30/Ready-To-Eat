@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/firebase/auth.dart';
-import 'package:shoppuneet/screens/home/BottomNavigation.dart';
+// import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/update.dart';
 
