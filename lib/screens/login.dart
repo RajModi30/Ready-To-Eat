@@ -1,4 +1,3 @@
-// import 'package:shoppuneet/screens/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
@@ -269,7 +268,7 @@ class _MyLoginState extends State<MyLogin> {
         Fluttertoast.showToast(msg: "logged in");
 
         Timer(
-            Duration(seconds: 3),
+            Duration(seconds: 2),
             () => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: ((context) => BottomNavigation()))));
 

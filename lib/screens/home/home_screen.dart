@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/firebase/auth.dart';
+import 'package:shoppuneet/screens/category/categoryscreen.dart';
 import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
@@ -151,7 +152,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircleAvatar(
               child: ClipOval(
-                child: Image.network(photo,fit: BoxFit.cover,),
+                child: Container(
+                  height: height * 0.25,
+                  width: width * 0.25,
+                  child: Image.network(photo,fit: BoxFit.fill,)),
               ),
               radius: 48,
             ),
@@ -256,6 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         ),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.amber.shade300,
         title: Text("Home",style: TextStyle(color: Colors.black87),),
         iconTheme: IconThemeData(color: Colors.black),
@@ -332,7 +337,79 @@ class _HomeScreenState extends State<HomeScreen> {
                 activeColorOverride: (i) => colors[i]
               )
             ),
-            
+            /*
+            SizedBox(
+              height: height * 0.03,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("NAMKEEN",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontFamily: 'BOOKOS.ttf'
+                    )
+                  ),
+                  GestureDetector(
+                    child: Text("VIEW ALL",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 17,
+                        fontFamily: 'BOOKOS.ttf'
+                      )
+                    ),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CategoryScreen()));
+                    },
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: height * 0.02,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  Container(
+                    height: 250,
+                    width: 150,
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Image.asset('assets/images/items/chakri/naylon sev.png')
+                        ),
+                        Expanded(child: Container(
+                          child: Column(
+                            children: [
+                              Text('Naylon Sev',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              Text('Weight : 200 gm',style: TextStyle(fontSize: 12.8),),
+                              SizedBox(height: 3,),
+                              Text("Price : 40 Rs.")
+                            ],
+                          ),
+                        ))
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            */
+            // nothing
           ],
         )
       ),

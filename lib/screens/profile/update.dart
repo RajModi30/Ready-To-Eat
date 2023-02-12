@@ -73,6 +73,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
               child: TextFormField(
                 controller: nameController,
                 keyboardType: TextInputType.text,
+                textDirection: TextDirection.ltr,
+                // textAlign: TextAlign.right,
+                maxLength: 32,
                 onChanged: updateName
               ),
             ),

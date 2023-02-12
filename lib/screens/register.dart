@@ -69,6 +69,7 @@ class _MyRegisterState extends State<MyRegister> {
                           children: [
                             TextFormField(
                               controller: nameController,
+                              textInputAction: TextInputAction.next,
                               style: TextStyle(color: Colors.white),
                               obscureText: false,
                               keyboardType: TextInputType.text,
@@ -111,6 +112,7 @@ class _MyRegisterState extends State<MyRegister> {
                               height: 30,
                             ),
                             TextFormField(
+                              textInputAction: TextInputAction.next,
                               controller: emailController,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -150,6 +152,7 @@ class _MyRegisterState extends State<MyRegister> {
                               height: 30,
                             ),
                             TextFormField(
+                              textInputAction: TextInputAction.done,
                               controller: passController,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -279,8 +282,6 @@ class _MyRegisterState extends State<MyRegister> {
           msg: "Successfully Registered",
           toastLength: Toast.LENGTH_SHORT,
         );
-
-        Fluttertoast.showToast(msg: "Welcome " + name + " !!",toastLength: Toast.LENGTH_LONG);
 
         Timer(
             const Duration(seconds: 3),

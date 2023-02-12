@@ -86,7 +86,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/slide/
-    - assets/images/items/
+    - assets/images/items/chakri/
+    - assets/images/items/popcorn/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -110,6 +111,9 @@ flutter:
         - asset: assets/fonts/Yellowfonts.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
+    - family: BOOKOS
+      fonts:
+        - asset: assets/fonts/BOOKOS.ttf
     - family: Courgette
       fonts:
         - asset: assets/fonts/Courgette.ttf
