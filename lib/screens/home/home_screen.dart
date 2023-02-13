@@ -185,6 +185,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: () {
+                Navigator.pop(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
                 // return const HomeScreen();
                 // changeSelected(0);
                 // Navigator.push(context,
@@ -313,136 +315,136 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
-              child: CarouselSlider.builder(
-                  itemCount: s1.length,
-                  options: CarouselOptions(
-                      height: height * 0.22,
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 0.9,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 5),
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          // print(reason.toString());//print the reason either auto or manual
-                          activeIndex = index;
-                        });
-                      }),
-                  itemBuilder: (context, index, realIndex) {
-                    final image = s1[index];
-                    return Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          image,
-                          fit: BoxFit.cover,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 15),
+                child: CarouselSlider.builder(
+                    itemCount: s1.length,
+                    options: CarouselOptions(
+                        height: height * 0.22,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.9,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 5),
+                        enlargeCenterPage: true,
+                        scrollDirection: Axis.horizontal,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            // print(reason.toString());//print the reason either auto or manual
+                            activeIndex = index;
+                          });
+                        }),
+                    itemBuilder: (context, index, realIndex) {
+                      final image = s1[index];
+                      return Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                    );
-                  }),
+                      );
+                    }),
+              ),
+              const SizedBox(
+                height: 20,
             ),
-            const SizedBox(
-              height: 20,
-          ),
-          AnimatedSmoothIndicator(
-              activeIndex: activeIndex,
-              count: s1.length,
-              effect: CustomizableEffect(
-                dotDecoration: const DotDecoration(
-                  color: Colors.black54,
-                  width: 10,
-                  height: 10,
-                ),
-                activeDotDecoration: DotDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  width: 20,
-                  height: 20,
-                ),
-                activeColorOverride: (i) => colors[i]
-              )
-            ),
-            /*
-            SizedBox(
-              height: height * 0.03,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("NAMKEEN",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      fontFamily: 'BOOKOS.ttf'
-                    )
+            AnimatedSmoothIndicator(
+                activeIndex: activeIndex,
+                count: s1.length,
+                effect: CustomizableEffect(
+                  dotDecoration: const DotDecoration(
+                    color: Colors.black54,
+                    width: 10,
+                    height: 10,
                   ),
-                  GestureDetector(
-                    child: Text("VIEW ALL",
+                  activeDotDecoration: DotDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    width: 20,
+                    height: 20,
+                  ),
+                  activeColorOverride: (i) => colors[i]
+                )
+              ),
+              /*
+              SizedBox(
+                height: height * 0.03,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("NAMKEEN",
                       style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 17,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         fontFamily: 'BOOKOS.ttf'
                       )
                     ),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CategoryScreen()));
-                    },
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: height * 0.02,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: [
-                  Container(
-                    height: 250,
-                    width: 150,
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Image.asset('assets/images/items/chakri/naylon sev.png')
-                        ),
-                        Expanded(child: Container(
-                          child: Column(
-                            children: [
-                              Text('Naylon Sev',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              SizedBox(height: 5,),
-                              Text('Weight : 200 gm',style: TextStyle(fontSize: 12.8),),
-                              SizedBox(height: 3,),
-                              Text("Price : 40 Rs.")
-                            ],
-                          ),
-                        ))
-                      ],
+                    GestureDetector(
+                      child: Text("VIEW ALL",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 17,
+                          fontFamily: 'BOOKOS.ttf'
+                        )
+                      ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => CategoryScreen()));
+                      },
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-            */
-            // nothing
-          ],
+              SizedBox(
+                height: height * 0.02,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 250,
+                      width: 150,
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Image.asset('assets/images/items/chakri/naylon sev.png')
+                          ),
+                          Expanded(child: Container(
+                            child: Column(
+                              children: [
+                                Text('Naylon Sev',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                Text('Weight : 200 gm',style: TextStyle(fontSize: 12.8),),
+                                SizedBox(height: 3,),
+                                Text("Price : 40 Rs.")
+                              ],
+                            ),
+                          ))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              */
+              // nothing
+            ],
+          ),
         )
       ),
     );
@@ -458,14 +460,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> pickImage() async {
     try {
-       final image = await ImagePicker().pickImage(source: ImageSource.camera);
+       final image2 = await ImagePicker().pickImage(source: ImageSource.gallery);
       // if (image == null) return;
-      final imageSelect = File(image!.path);
-      this.image = imageSelect;
+      final imageSelect = File(image2!.path);
+      this.image= imageSelect;
       print(image);
       if (user == null) {
         // print("exist");
-      } else {
+      } 
+      else {
         final ref = FirebaseStorage.instance
             .ref()
             .child('userimages')
@@ -486,9 +489,50 @@ class _HomeScreenState extends State<HomeScreen> {
           print(error.code);
         }
       }
-    } on PlatformException catch (e) {
+    } 
+    on PlatformException catch (e) {
       Fluttertoast.showToast(msg: e.code);
-    } catch (e) {
+    } 
+    catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    }
+
+
+    try {
+       final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      // if (image == null) return;
+      final imageSelect = File(image!.path);
+      this.image = imageSelect;
+      print(image);
+      if (user == null) {
+        // print("exist");
+      } 
+      else {
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('userimages')
+            .child(name + '.jpg');
+        await ref.putFile(this.image!);
+        String url = await ref.getDownloadURL();
+        print(url);
+
+        try {
+          final user = auth.currentUser!.uid;
+          print("user id=> $user");
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(user)
+              .update({"imageurl": url});
+          // getUserData();
+        } on FirebaseException catch (error) {
+          print(error.code);
+        }
+      }
+    } 
+    on PlatformException catch (e) {
+      Fluttertoast.showToast(msg: e.code);
+    } 
+    catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
   }

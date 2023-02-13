@@ -106,7 +106,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   ? () {
                     updateUserData();
                     print("clicked");
-                    Navigator.push(
+                    Navigator.pop(
                       context, MaterialPageRoute( builder: (context) => HomeScreen())
                     );
                   }

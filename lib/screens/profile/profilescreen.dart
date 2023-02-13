@@ -270,7 +270,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // if (user == null) {
     //   print("user is not exist");
     // } else {
-      
       try {
         final user = auth.currentUser!.uid;
         final DocumentSnapshot snapshot = await FirebaseFirestore.instance
