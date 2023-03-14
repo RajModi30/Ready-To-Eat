@@ -10,11 +10,13 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:shoppuneet/screens/category/categoryscreen.dart';
 // import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
+import 'package:shoppuneet/widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../settings.dart';
@@ -369,7 +371,60 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   activeColorOverride: (i) => colors[i]
                 )
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Categories",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),  
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => categoryScreen()));
+                  },
+                  child: const Text(
+                    "See all",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const ListContainer1(),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Popular",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListContainer2(
+            s1: Axis.horizontal,
+          ),
+          const SizedBox(
+            height: 30,
+          )
               /*
               SizedBox(
                 height: height * 0.03,

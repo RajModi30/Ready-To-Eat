@@ -86,6 +86,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/slide/
+    - assets/images/items/
     - assets/images/items/chakri/
     - assets/images/items/popcorn/
   #   - images/a_dot_ham.jpeg

@@ -13,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigation extends State<BottomNavigation> {
-  final screens = [HomeScreen(), CategoryScreen(), SettingPage()];
+  final screens = [HomeScreen(), categoryScreen(), SettingPage()];
   int currentIndex = 0;
 
   @override
