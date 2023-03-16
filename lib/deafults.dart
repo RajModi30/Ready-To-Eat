@@ -107,7 +107,7 @@ class Demo {
   String Popcorn = "assets/images/slide/popcorn.png";
   String Sikandar_Peanuts = "assets/images/items/MASALA SING new.png";
   String Sikandar_Chana = "assets/images/items/sikandar new.png";
-  String Biscuit = "assets/images/slide/karachi_home.png";
+  String Biscuit = "assets/images/items/chakri/bis.png";
 
   String namkeen_kachori = "assets/images/items/chakri/1 dry fruit kachori.png";
   String namkeen_chanajor = "assets/images/items/chakri/1 chanajor.png";

@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var name="";
   List<String> s1 = [
     "assets/images/slide/sikandar.png",
-    "assets/images/slide/MASALA SING.png",
+    "assets/images/slide/karachi_home.png",
     "assets/images/slide/soya products.png",
     "assets/images/slide/popcorn1.png",
   ];
@@ -304,7 +304,10 @@ class _HomeScreenState extends State<HomeScreen> {
           CircleAvatar(
             radius: 17,
             backgroundColor: Colors.lime.shade100,
-            child: Icon(Icons.search,size: 20,color: Colors.black,),
+            child: Icon(
+              Icons.search,
+              size: 20,
+              color: Colors.black,),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -361,13 +364,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 effect: CustomizableEffect(
                   dotDecoration: const DotDecoration(
                     color: Colors.black54,
-                    width: 10,
-                    height: 10,
+                    width: 6,
+                    height: 6,
                   ),
                   activeDotDecoration: DotDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    width: 20,
-                    height: 20,
+                    width: 10,
+                    height: 10,
                   ),
                   activeColorOverride: (i) => colors[i]
                 )

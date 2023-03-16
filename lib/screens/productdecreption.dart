@@ -102,6 +102,7 @@ class _ProductDecreptionState extends State<ProductDecreption> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 25,
                                         )),
+                                        // already in cart function
                                     Consumer<CartService>(
                                       builder: (context, cart, child) {
                                         Widget r1;
