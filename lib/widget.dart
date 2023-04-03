@@ -155,7 +155,7 @@ class ListContainer2 extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 10),
       child: Container(
-        height: 200,
+        height: 220,
         child: GridView.builder(
             scrollDirection: s1,
             itemCount: categories.length,

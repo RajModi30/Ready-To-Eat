@@ -13,12 +13,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:shoppuneet/screens/category/categoryscreen.dart';
-// import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
 import 'package:shoppuneet/widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var name="";
   List<String> s1 = [
     "assets/images/slide/sikandar.png",
-    "assets/images/slide/MASALA SING.png",
+    "assets/images/slide/karachi_home.png",
     "assets/images/slide/soya products.png",
     "assets/images/slide/popcorn1.png",
   ];
@@ -300,11 +298,14 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.amber.shade300,
         title: Text("Home",style: TextStyle(color: Colors.black87),),
         iconTheme: IconThemeData(color: Colors.black),
-        actions: [
+     /*   actions: [
           CircleAvatar(
             radius: 17,
             backgroundColor: Colors.lime.shade100,
-            child: Icon(Icons.search,size: 20,color: Colors.black,),
+            child: Icon(
+              Icons.search,
+              size: 20,
+              color: Colors.black,),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -314,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Icon(Icons.shopping_bag,size: 20,color: Colors.black,),
             ),
           )
-        ],
+        ], */
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -361,13 +362,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 effect: CustomizableEffect(
                   dotDecoration: const DotDecoration(
                     color: Colors.black54,
-                    width: 10,
-                    height: 10,
+                    width: 6,
+                    height: 6,
                   ),
                   activeDotDecoration: DotDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    width: 20,
-                    height: 20,
+                    width: 10,
+                    height: 10,
                   ),
                   activeColorOverride: (i) => colors[i]
                 )

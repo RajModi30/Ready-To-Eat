@@ -1,0 +1,6 @@
+productDes		:	description			:	
+productImage	:	firebase image		:	
+productName		:	name				:	
+productPrice	:	price				:	
+productVali		:	best before			:	BEST BEFORE 2 MONTHS
+productWeight	:	200 GM / 500 GM		:	
