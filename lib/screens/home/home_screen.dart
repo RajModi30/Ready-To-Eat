@@ -13,12 +13,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:shoppuneet/screens/category/categoryscreen.dart';
-// import 'package:shoppuneet/screens/home/BottomNavigation.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
 import 'package:shoppuneet/widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -300,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.amber.shade300,
         title: Text("Home",style: TextStyle(color: Colors.black87),),
         iconTheme: IconThemeData(color: Colors.black),
-        actions: [
+     /*   actions: [
           CircleAvatar(
             radius: 17,
             backgroundColor: Colors.lime.shade100,
@@ -317,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Icon(Icons.shopping_bag,size: 20,color: Colors.black,),
             ),
           )
-        ],
+        ], */
       ),
       body: SingleChildScrollView(
         child: Padding(
