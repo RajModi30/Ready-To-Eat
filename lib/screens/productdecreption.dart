@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/models/cartitem.dart';
 import 'package:shoppuneet/models/category.dart';
 import 'package:shoppuneet/providers/cartservice.dart';
 import 'package:shoppuneet/providers/categoryselectionservice.dart';
 import 'package:shoppuneet/screens/cartscreen.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../models/product_model.dart';
 
 
 class ProductDecreption extends StatefulWidget {
   Product p1;
 
-  ProductDecreption(this.p1, {super.key});
+  ProductDecreption(this.p1, {super.key});    
 
   @override
   State<ProductDecreption> createState() => _ProductDecreptionState();
 }
 
 class _ProductDecreptionState extends State<ProductDecreption> {
+
+  Demo _mydemo = Demo();
+  int q1 = 1; 
+  final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     CategorySelectionService c1 =
@@ -142,14 +152,115 @@ class _ProductDecreptionState extends State<ProductDecreption> {
                                           );
                                         } else {
                                           r1 = Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 20),
+                                            padding: const EdgeInsets.only(right: 20),
+                                            child: Container(
+                                              //color: Colors.red,
+                                              alignment: Alignment.center,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 150,
+                                                    height: 40,
+                                                    decoration: BoxDecoration(
+                                                      //color: Colors.blue,
+                                                      border: Border.all(
+                                                        color: Colors.grey,
+                                                      ),
+                                                      borderRadius: BorderRadius.all(
+                                                        Radius.circular(20),
+                                                      ),
+                                                    ),
+                                                    child: Row(
+                                                    mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          // cartController.addProduct(Product.products[index]);
+                                                        setState(() {
+                                                          if(q1!=0){
+                                                            q1--;
+                                                            _mydemo.toast(msg: "$q1 item removed from cart");
+                                                          }
+                                                          else{
+                                                            // _mydemo.toast(msg: "Nothing to Remove!");
+                                                            ElevatedButton(
+                                              onPressed: () {
+                                                print("clicked");
+                                                c2.add(CartItem(
+                                                    category: widget.p1));
+                                              },
                                               child: Text(
-                                                "Already in Cart",
+                                                "Add to Cart",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20),
-                                              ));
+                                              ),
+                                              style: ButtonStyle(
+                                                  fixedSize:
+                                                      MaterialStateProperty.all(
+                                                          const Size(150, 50)),
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors
+                                                              .green.shade400),
+                                                  shape: MaterialStateProperty.all(
+                                                      RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20)))),
+                                            );
+                                                          }
+                                                          
+                                                        });
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Text("-",
+                                                              style: TextStyle(
+                                                                  fontSize: 20)),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                          "$q1",
+                                                          style: TextStyle(
+                                                              fontSize: 20)),
+                                                      InkWell(
+                                                        onTap: () async{
+                                                          setState(() {
+                                                            q1++;
+                                                          });
+                                                          _mydemo.toast(msg: "$q1 item added to cart");
+                                                          final user = FirebaseAuth.instance.currentUser;
+                                                          await FirebaseFirestore.instance.collection('cartData').doc(user?.uid).collection("cart").add({
+                                                            'id': 1,
+                                                            'name': Product,
+                                                          });
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  8.0),
+                                                          child: Text("+",
+                                                              style: TextStyle(
+                                                                  fontSize: 20)),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        /*    Text("Already in Cart",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20
+                                              ),
+                                            ) */
+                                          );
                                         }
                                         return r1;
                                       },

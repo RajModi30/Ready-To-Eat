@@ -32,8 +32,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
 }*/
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/models/category.dart';
+import 'package:shoppuneet/models/product_model.dart';
 import 'package:shoppuneet/models/utils.dart';
 // import 'package:groceryapp/screen/declare.dart';
 // import 'package:groceryapp/model/utils.dart';
@@ -46,6 +48,7 @@ import 'package:shoppuneet/widget.dart';
 
 class categoryScreen extends StatelessWidget {
   Demo d1 = Demo();
+  final cartController = Get.put(CartController());
   List<Category_item> categories = Utils.getMockedcategories();
 
   categoryScreen({super.key});

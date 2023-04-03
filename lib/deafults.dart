@@ -153,4 +153,81 @@ class Demo {
   String beverages_tea = "assets/images/beverages/tea.png";
   String beverages_water = "assets/images/beverages/water.png";
   */
+
+  bool toast({required String msg}) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+      
+       webPosition: "left",
+        fontSize: 16.0);
+    return true;
+  }
 }
+/*
+class ProductsProvider with ChangeNotifier {
+  static List<Category_item> _productsList = [];
+  List<Category_item> get getProducts {
+    return _productsList;
+  }
+
+  List<Category_item> get getOnSaleProducts {
+    return _productsList.where((element) => element.isOnSale).toList();
+  }
+
+  Future<void> fetchProducts() async {
+    await FirebaseFirestore.instance
+        .collection('products')
+        .get()
+        .then((QuerySnapshot productSnapshot) {
+      _productsList = [];
+      // _productsList.clear();
+      productSnapshot.docs.forEach((element) {
+        _productsList.insert(
+            0,
+            Category_item(
+              productName: element.get('productName'),
+              title: element.get('title'),
+              image: element.get('productImage'),
+              // productCategoryName: element.get('productCategoryName'),
+              price: double.parse(
+                element.get('productPrice'),
+              ),
+              productVali: element.get('productVali'),
+              productDes: element.get('productDes'),
+              productWeight: element.get('productWeight'),
+            ));
+      });
+    });
+    notifyListeners();
+  }
+
+  ProductModel findProdById(String productId) {
+    return _productsList.firstWhere((element) => element.id == productId);
+  }
+
+  List<ProductModel> findByCategory(String categoryName) {
+    List<ProductModel> _categoryList = _productsList
+        .where((element) => element.productCategoryName
+            .toLowerCase()
+            .contains(categoryName.toLowerCase()))
+        .toList();
+    return _categoryList;
+  }
+
+  List<ProductModel> searchQuery(String searchText) {
+    List<ProductModel> _searchList = _productsList
+        .where(
+          (element) => element.title.toLowerCase().contains(
+                searchText.toLowerCase(),
+              ),
+        )
+        .toList();
+    return _searchList;
+  }
+}
+*/
