@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shoppuneet/firebase/auth.dart';
+import 'package:shoppuneet/screens/forgot.dart';
+import 'package:shoppuneet/screens/login.dart';
+import 'package:shoppuneet/screens/profile/address.dart';
+import 'package:shoppuneet/screens/profile/changepassword.dart';
 import 'dart:io';
 
 import 'package:shoppuneet/screens/profile/update.dart';
+import 'package:shoppuneet/screens/profile/useraddress.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -34,7 +40,7 @@ class _SettingPageState extends State<SettingPage> {
   }*/ 
   //  drawer mate 
 
-void initState() {
+  void initState() {
     // isButton = false;
     getUserData();
     // pickImage();
@@ -43,6 +49,8 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height ;
+    double width = MediaQuery.of(context).size.width ;
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings",style: TextStyle(color: Colors.black87),),
@@ -65,50 +73,84 @@ void initState() {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.003,
+                height: height * 0.003,
               ),
               Text(name,style: TextStyle(fontSize: 20,fontFamily: 'BreeSerif'),),
               Text(email,style: TextStyle(fontSize: 15,fontFamily: 'BreeSerif',color: Colors.black54),),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
+                height: height * 0.02,
                 // width: MediaQuery.of(context).size.width * 0.03,
               ),
               Divider(color: Colors.black54,),
-              ListTile(
-                leading: Icon(
-                  Icons.person,
-                  color: Colors.red,
-                ),
-                title: Text("Change Password"),
-                onTap: () {
-              //  Navigator.push(
-              //    context,
-              //    MaterialPageRoute(builder: (context) => UpdateProfile()),
-              // );
-                },
-                
-                trailing: Icon(
-                  Icons.arrow_forward_ios, 
-                  color: Colors.black
-                ),
-              ),
-              Divider(),
-              ListTile(
-                leading: Icon(Icons.payment,
-                  color: Colors.red),
-                title: Text("Payment"),
-                onTap: () {
-              //  Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => MyAcc()),
-              // );
-                },
-                trailing: Icon(
-                  Icons.arrow_forward_ios, 
-                  color: Colors.black),
-                subtitle: Text(
-                  "Manage Your Payment Methods",
-                  style: TextStyle(fontSize: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                child: Container(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.person,
+                          color: Colors.red,
+                        ),
+                        title: Text("Change Password"),
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Forgot()),
+                          );
+                        },
+                        
+                        trailing: Icon(
+                          Icons.arrow_forward_ios, 
+                          color: Colors.black
+                        ),
+                      ),
+                      SizedBox(height: height * 0.002,),
+                      Divider(thickness: 1.2,color: Colors.grey.shade400,),
+                      SizedBox(height: height * 0.002,),
+                      ListTile(
+                        leading: Icon(Icons.home_outlined,
+                          color: Colors.red),
+                        title: Text("Manage Address"),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AddAddress()),
+                          );
+                          
+                        },
+                        trailing: Icon(
+                          Icons.arrow_forward_ios, 
+                          color: Colors.black),
+                        // subtitle: Text(
+                        //   "Manage Your Address",
+                        //   style: TextStyle(fontSize: 12),
+                        // ),
+                      ),
+                      SizedBox(height: height * 0.002,),
+                      Divider(thickness: 1.2,color: Colors.grey.shade400,),
+                      SizedBox(height: height * 0.002,),
+                      ListTile(
+                        trailing: Icon(
+                          Icons.arrow_forward_ios, 
+                          color: Colors.black
+                        ),
+                        leading: const Icon(Icons.logout_rounded,color: Colors.red,),
+                        title: const Text(
+                          "Logout",
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        onTap: () {
+                          signout();
+                        }
+                      ),
+                      SizedBox(height: height * 0.002,),
+                      Divider(thickness: 1.2,color: Colors.grey.shade400,),
+                      SizedBox(height: height * 0.002,),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -155,19 +197,14 @@ void initState() {
     }
   }
 
-  Future<void> getUserData() async {
-    // final uid=GoogleButton().authResult.user
-    // if (user == null) {
-    //   print("user is not exist");
-    // } else {
-      
+  Future<void> getUserData() async {  
       try {
         final user = auth.currentUser!.uid;
         final DocumentSnapshot snapshot = await FirebaseFirestore.instance
             .collection("users")
             .doc(user)
             .get();
-        print(user);
+        // print(user);
         // id=userDoc.get('id');
         setState(() {
           photo = snapshot.get('imageurl');
@@ -182,4 +219,14 @@ void initState() {
       }
     // }
   }
+
+  void signout() async {
+    final googleAccount = GoogleSignIn();
+    googleAccount.signOut();
+    print("normal email signout $uid");
+    await auth.signOut();
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MyLogin()));
+  }
+
+  
 }

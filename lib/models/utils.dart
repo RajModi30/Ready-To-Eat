@@ -16,6 +16,7 @@ class Utils {
                 image: d1.namkeen_chanajor,
                 title: "Chana Chor Garam",
                 price: "₹60/150 gm",
+                
                 productSubCategory: [
                   ProductDetails(
                       c1: Colors.red,

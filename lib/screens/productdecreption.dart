@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/models/cartitem.dart';
 import 'package:shoppuneet/models/category.dart';
+import 'package:shoppuneet/models/dummymodel.dart';
 import 'package:shoppuneet/providers/cartservice.dart';
 import 'package:shoppuneet/providers/categoryselectionservice.dart';
 import 'package:shoppuneet/screens/cartscreen.dart';
@@ -24,18 +26,26 @@ class ProductDecreption extends StatefulWidget {
 
 class _ProductDecreptionState extends State<ProductDecreption> {
 
+  // Future addToCart()async{
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //   var currentUser = _auth.currentUser;
+  //   CollectionReference _collectionRef = FirebaseFirestore.instance.collection("user-cart-items");
+  //   return _collectionRef.doc(currentUser!.email).collection("items").doc().set({
+  //    "name" : widget._products["product-name"],
+  //    "price" : widget._products["product-price"],
+  //    "image" : widget._products["product-image"],
+  //   }).then((value) => print("added to cart"));
+  // }
+
   Demo _mydemo = Demo();
   int q1 = 1; 
   final cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
-    CategorySelectionService c1 =
-        Provider.of<CategorySelectionService>(context, listen: false);
-
+    CategorySelectionService c1 = Provider.of<CategorySelectionService>(context, listen: false);
     CartService c2 = Provider.of<CartService>(context, listen: false);
 // CategorySelectionService c1=CategorySelectionService();
     widget.p1 = c1.selectProduct;
-
     return Scaffold(
         body: ListView.builder(
             itemCount: widget.p1.productSubCategory.length,
@@ -48,9 +58,7 @@ class _ProductDecreptionState extends State<ProductDecreption> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 300,
-                        ),
+                        SizedBox(height: 300,),
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Text(
@@ -229,15 +237,26 @@ class _ProductDecreptionState extends State<ProductDecreption> {
                                                               fontSize: 20)),
                                                       InkWell(
                                                         onTap: () async{
+                                                          print("hello");
                                                           setState(() {
                                                             q1++;
                                                           });
                                                           _mydemo.toast(msg: "$q1 item added to cart");
+                                                          ProductModel dummymodel = ProductModel(id: 1,product: ProductDummy(
+                                                            rate: "60.00",
+                                                            category: "Namkeen",
+                                                            image: d1.namkeen_chanajor,
+                                                            name: "Chana chor garam"
+                                                          ));
+                                                          print(dummymodel.toJson());
+                                                          ProductModel getDataFromResonse=ProductModel.fromJson(dummymodel.toJson());
+                                                          print("getData::::${getDataFromResonse.toString()}");
                                                           final user = FirebaseAuth.instance.currentUser;
                                                           await FirebaseFirestore.instance.collection('cartData').doc(user?.uid).collection("cart").add({
                                                             'id': 1,
-                                                            'name': Product,
-                                                          });
+                                                            'Product': dummymodel.toJson(),
+                                                            
+                                                          }).then((value) => print('$value'));
                                                         },
                                                         child: Padding(
                                                           padding:

@@ -34,9 +34,9 @@ class _GoogleButtonState extends State<GoogleButton> {
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
         try {
           final authresult = await auth.signInWithCredential(
-              GoogleAuthProvider.credential(
-                  idToken: googleAuth.idToken,
-                  accessToken: googleAuth.accessToken));
+            GoogleAuthProvider.credential(
+              idToken: googleAuth.idToken,
+              accessToken: googleAuth.accessToken));
           final uid = authresult.user!.uid;
           print(uid);
 
@@ -48,12 +48,19 @@ class _GoogleButtonState extends State<GoogleButton> {
               'imageurl': auth.currentUser!.photoURL,
               'createdAt': Timestamp.now()
             });
-          } else {
+          } 
+          else {
             print("already created $uid");
           }
+          
+          Fluttertoast.showToast(msg: "Warning : Once you add item in your cart you can't remove it ! \nBe careful when you add item",gravity: ToastGravity.CENTER);
+          
+          Timer( Duration(seconds: 5), 
+          
+          () => 
           Navigator.pushReplacement(context,
-              // MaterialPageRoute(builder: ((context) => BottomNavigation())));
-              MaterialPageRoute(builder: ((context) => HomeScreen())));
+            // MaterialPageRoute(builder: ((context) => BottomNavigation())));
+            MaterialPageRoute(builder: ((context) => HomeScreen()))));
         } on FirebaseException catch (error) {
           Fluttertoast.showToast(msg: error.code);
         } catch (error) {

@@ -137,7 +137,7 @@ class _MyLoginState extends State<MyLogin> {
                             SizedBox(
                               height: 30,
                             ),
-                          /*  Row(
+                            /*  Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -265,10 +265,14 @@ class _MyLoginState extends State<MyLogin> {
             email: emailController.text.toLowerCase().trim(),
             password: passController.text.trim());
 
-        Fluttertoast.showToast(msg: "logged in");
+        Fluttertoast.showToast(msg: "Logged IN",gravity: ToastGravity.BOTTOM,backgroundColor: Colors.green.shade600);
+        // Timer(Duration(seconds: 3), () { });
+        Fluttertoast.showToast(msg: "Warning : Once you add item in your cart you can't remove it ! \nBe careful when you add item",gravity: ToastGravity.CENTER,toastLength: Toast.LENGTH_LONG
+        );
 
         Timer(
-            Duration(seconds: 2),
+            Duration(seconds: 3),
+        
             () => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: ((context) => HomeScreen()))));
 

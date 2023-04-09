@@ -23,10 +23,12 @@ class _MyRegisterState extends State<MyRegister> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController phoneContoller = TextEditingController();
 
   String password = "";
   String email = "";
   String name = "";
+  String phone = "";
 
   bool _obsecureText = true;
 
@@ -67,6 +69,7 @@ class _MyRegisterState extends State<MyRegister> {
                         key: _formKey,
                         child: Column(
                           children: [
+                            // Name controller
                             TextFormField(
                               controller: nameController,
                               textInputAction: TextInputAction.next,
@@ -111,6 +114,7 @@ class _MyRegisterState extends State<MyRegister> {
                             SizedBox(
                               height: 30,
                             ),
+                            // Email Controller
                             TextFormField(
                               textInputAction: TextInputAction.next,
                               controller: emailController,
@@ -151,6 +155,7 @@ class _MyRegisterState extends State<MyRegister> {
                             SizedBox(
                               height: 30,
                             ),
+                            // Password Controller
                             TextFormField(
                               textInputAction: TextInputAction.done,
                               controller: passController,
@@ -207,6 +212,88 @@ class _MyRegisterState extends State<MyRegister> {
                             SizedBox(
                               height: 40,
                             ),
+                            // Phone number controller
+                            TextFormField(
+                              // textInputAction: TextInputAction.next,
+                              controller: phoneContoller,
+                              keyboardType: TextInputType.number,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Enter your phone number";
+                                // } else if (!EmailValidator.validate(value)) {
+                                } else if (value.length!=10) {
+                                  return "Enter valid phone number";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  hintText: "Phone number",
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            // TextFormField(
+                            //   controller: addressController,
+                            //   textInputAction: TextInputAction.next,
+                            //   style: TextStyle(color: Colors.white),
+                            //   obscureText: false,
+                            //   keyboardType: TextInputType.text,
+                            //   validator: (value) {
+                            //     if (value!.isEmpty) {
+                            //       return "Enter address";
+                            //     } else if (!RegExp(r'[\a-zA-Z]+$').hasMatch(value)) {
+                            //       return "Enter valid name";
+                            //     } else if (value.length < 6 || value.length > 20) {
+                            //       return "Enter whole address";
+                            //     } else {
+                            //       return null;
+                            //     }
+                            //   },
+                            //   decoration: InputDecoration(
+                            //       // prefixIcon : Icon(
+                            //       //   Icons.account_circle_outlined,
+                            //       //   color: Colors.black54,
+                            //       //   size: 30,
+                            //       // ),
+                            //       enabledBorder: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(10),
+                            //         borderSide: BorderSide(
+                            //           color: Colors.white,
+                            //         ),
+                            //       ),
+                            //       focusedBorder: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(10),
+                            //         borderSide: BorderSide(
+                            //           color: Colors.black,
+                            //         ),
+                            //       ),
+                            //       hintText: "address",
+                            //       hintStyle: TextStyle(color: Colors.white),
+                            //       border: OutlineInputBorder(
+                            //         borderRadius: BorderRadius.circular(10),
+                            //       )),
+                            // ),
+                            // SizedBox(
+                            //   height: 30,
+                            // ),
                             // Container(
                             //   decoration: BoxDecoration(
                             //     border: Border.all(color: Colors.black12)
@@ -226,12 +313,15 @@ class _MyRegisterState extends State<MyRegister> {
                                       fontSize: 27,
                                       fontWeight: FontWeight.w700),
                                 ),
+                                
                                 CircleAvatar(
                                   radius: 30,
                                   backgroundColor: Color(0xff4c505b),
                                   child: IconButton(
                                       color: Colors.white,
-                                      onPressed: () {onSignUP();},
+                                      onPressed: () {
+                                        onSignUP();
+                                      },
                                       icon: Icon(
                                         Icons.arrow_forward,
                                       )),
@@ -275,12 +365,15 @@ class _MyRegisterState extends State<MyRegister> {
           'email': emailController.text.toLowerCase().trim(),
           'password' : passController.text.trim(),
           'imageurl': _default,
+          'phone' : phoneContoller.text,
           'createdAt': Timestamp.now()
         }, SetOptions(merge: true));
         print("success $uid");
         Fluttertoast.showToast(
           msg: "Successfully Registered",
           toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.green.shade600,
         );
 
         Timer(

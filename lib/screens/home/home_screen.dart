@@ -13,11 +13,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shoppuneet/deafults.dart';
 import 'package:shoppuneet/firebase/auth.dart';
 import 'package:shoppuneet/screens/category/categoryscreen.dart';
+import 'package:shoppuneet/screens/helpdesk.dart';
 import 'package:shoppuneet/screens/login.dart';
 import 'package:shoppuneet/screens/profile/profilescreen.dart';
 import 'package:shoppuneet/widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../settings.dart';
+import '../order/order.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -185,8 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: () {
-                Navigator.pop(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.pop(context
+                  // MaterialPageRoute(builder: (context) => HomeScreen())
+                  );
                 // return const HomeScreen();
                 // changeSelected(0);
                 // Navigator.push(context,
@@ -227,7 +230,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 15,
                 ),
               ),
-              onTap: (() => changeSelected(2)),
+              onTap: (() {
+                changeSelected(2);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OrderScreen()));
+              }),
               trailing: Icon(
                   Icons.arrow_forward_ios, 
                   color: Colors.black
@@ -264,11 +270,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onTap: () {
                 changeSelected(4);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HelpDesk()));
               },
               trailing: Icon(
                   Icons.arrow_forward_ios, 
                   color: Colors.black
-                ),
+                ), 
             ),
             Divider(color: Colors.black45,),
             ListTile(

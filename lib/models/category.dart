@@ -25,11 +25,13 @@ class Product {
   String title;
   String price;
   String image;
+  // int q1;
   List<ProductDetails> productSubCategory;
   Product({
     required this.image,
     required this.title,
     required this.price,
+    // required this.q1,
     required this.productSubCategory,
   });
 }

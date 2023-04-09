@@ -37,8 +37,10 @@ class _SelectCategoryState extends State<SelectCategory> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.c1.title),
-        backgroundColor: Colors.amber,
+        elevation: 0,
+        backgroundColor: Colors.amber.shade300,
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text(widget.c1.title,style: TextStyle(color: Colors.black87),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
