@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shoppuneet/models/cartitem.dart';
@@ -27,32 +28,37 @@ class _CartScreenState extends State<CartScreen> {
     List<Category_item> categories = Utils.getMockedcategories();
     // print("item count::::${categories.length}");
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.amber.shade300,
-        title: Text("Check Out",style: TextStyle(color: Colors.black87),),
-        iconTheme: IconThemeData(color: Colors.black),),
-      body: SafeArea(
-        child: ListView.separated(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.amber.shade300,
+          title: Text(
+            "Check Out",
+            style: TextStyle(color: Colors.black87),
+          ),
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        body: SafeArea(
+            child: ListView.separated(
           scrollDirection: Axis.vertical,
           itemCount: categories.length,
           // itemBuilder: (context, index) {
-            
+
           // },
-            itemBuilder: ((BuildContext context, int index) =>
+          itemBuilder: ((BuildContext context, int index) =>
               Consumer<CartService>(builder: (context, c2, child) {
-            // List<Widget> cartitems=[];
-            List<CartItem> c1 = c2.items;
-            Product p1 = c1[index].category;
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      color: Colors.amber,
-                      // height: 100,
-                      child: Container(
+                // List<Widget> cartitems=[];
+                List<CartItem> c1 = c2.items;
+                Product p1 = c1[index].category;
+                return SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                          color: Colors.amber,
+                          // height: 100,
+                          child: Container(
                             color: Colors.amber,
                             width: MediaQuery.of(context).size.width,
                             height: 80,
@@ -71,7 +77,8 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                     SizedBox(width: 10),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
@@ -103,33 +110,34 @@ class _CartScreenState extends State<CartScreen> {
                                         // ),
                                       ],
                                     ),
-                                    SizedBox(width: 10,),
-                                    
+                                    SizedBox(
+                                      width: 10,
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+
+                        ElevatedButton(
+                            onPressed: () async {
+                              _placeOrder();
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => OrderScreen()),
+                              // );
+                            },
+                            child: Text('Place Order'))
+                        // SizedBox(height: MediaQuery.of(context).size.height * 0.35,),
+                      ],
                     ),
-                    SizedBox(height: 40,),
-                    
-                    ElevatedButton(onPressed: (){
-                      _placeOrder();
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => OrderScreen()),
-                      // );
-                      
-                    }, 
-                    child: Text('Place Order'))
-                    // SizedBox(height: MediaQuery.of(context).size.height * 0.35,),
-                    
-                  ],
-                  
-                ),
-              ),
-            );
-            /*
+                  ),
+                );
+                /*
             if (c2.items.isEmpty) {
               print("is empty");
               return Text("is empty");
@@ -190,7 +198,7 @@ class _CartScreenState extends State<CartScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                
+
                               ],
                             )
                           ],
@@ -201,14 +209,14 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               );
             } */
-          })),
-      separatorBuilder: (BuildContext context, int index) => SizedBox(height: 2),
-      
-    )));
+              })),
+          separatorBuilder: (BuildContext context, int index) =>
+              SizedBox(height: 2),
+        )));
   }
 
-  Future <void> _placeOrder() async{
-  //  print("success $uid");
+  Future<void> _placeOrder() async {
+    //  print("success $uid");
     Fluttertoast.showToast(
       msg: "Thanks For placing order!\nWe will deliver it very quickly!",
       toastLength: Toast.LENGTH_LONG,
@@ -216,23 +224,58 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: Colors.green.shade600,
     );
 
-        Timer(
-            const Duration(seconds: 3),
-            () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: ((context) => OrderScreen()))));
-      // } on FirebaseAuthException catch (error) {
-      //   print("Error occured ${error.message}");
-      //   Fluttertoast.showToast(
-      //       msg: error.code,
-      //       toastLength: Toast.LENGTH_SHORT,
-      //       backgroundColor: Colors.black,
-      //       fontSize: 20);
-      // } catch (error) {
-      //   Fluttertoast.showToast(
-      //       msg: error.toString(),
-      //       toastLength: Toast.LENGTH_SHORT,
-      //       backgroundColor: Colors.black,
-      //       fontSize: 20);
-      // }
+    Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: ((context) => OrderScreen()))));
+    // } on FirebaseAuthException catch (error) {
+    //   print("Error occured ${error.message}");
+    //   Fluttertoast.showToast(
+    //       msg: error.code,
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       backgroundColor: Colors.black,
+    //       fontSize: 20);
+    // } catch (error) {
+    //   Fluttertoast.showToast(
+    //       msg: error.toString(),
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       backgroundColor: Colors.black,
+    //       fontSize: 20);
+    // }
+  }
+
+  CollectionReference cartData =
+      FirebaseFirestore.instance.collection('cartData');
+  String cartId = '';
+
+  Future<void> addToCart() {
+    // Call the user's CollectionReference to add a new user
+    return cartData.add({
+      'user_id': 'temp-id',
+      //Here Add current User Id
+      'product_id': 'temp-pid'
+      //Here Add product Id which is to be added in cart,
+    }).then((value) {
+      print("Product Added to cart");
+      cartId = value.id;
+    }).catchError((error) => print("Failed to add product: $error"));
+  }
+
+  getCartData() async {
+    List cartList = [];
+    final getCartData = await cartData.get();
+    final cartId = [];
+    getCartData.docs.forEach((element) {
+      cartId.add(element.id);
+    });
+    print(cartId);
+    for (int i = 0; i < cartId.length; i++) {
+      cartList.add(
+        await cartData.doc(cartId[i]).get().then(
+              (snapshot) => snapshot.data(),
+            ),
+      );
+    }
+    print(cartList);
   }
 }
