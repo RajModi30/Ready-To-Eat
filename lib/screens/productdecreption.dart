@@ -185,39 +185,39 @@ class _ProductDecreptionState extends State<ProductDecreption> {
                                                         onTap: () {
                                                           // cartController.addProduct(Product.products[index]);
                                                         setState(() {
-                                                          if(q1!=0){
+                                                          if(q1!=1){
                                                             q1--;
                                                             _mydemo.toast(msg: "$q1 item removed from cart");
                                                           }
                                                           else{
-                                                            // _mydemo.toast(msg: "Nothing to Remove!");
-                                                            ElevatedButton(
-                                              onPressed: () {
-                                                print("clicked");
-                                                c2.add(CartItem(
-                                                    category: widget.p1));
-                                              },
-                                              child: Text(
-                                                "Add to Cart",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
-                                              ),
-                                              style: ButtonStyle(
-                                                  fixedSize:
-                                                      MaterialStateProperty.all(
-                                                          const Size(150, 50)),
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all(
-                                                          Colors
-                                                              .green.shade400),
-                                                  shape: MaterialStateProperty.all(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      20)))),
-                                            );
+                                                            _mydemo.toast(msg: "You can not remove it");
+                                                            // ElevatedButton(
+                                                            //   onPressed: () {
+                                                            //     print("clicked");
+                                                            //     c2.add(CartItem(
+                                                            //         category: widget.p1));
+                                                            //   },
+                                                            //   child: Text(
+                                                            //     "Add to Cart",
+                                                            //     style: TextStyle(
+                                                            //         fontWeight: FontWeight.bold,
+                                                            //         fontSize: 20),
+                                                            //   ),
+                                                            //   style: ButtonStyle(
+                                                            //       fixedSize:
+                                                            //           MaterialStateProperty.all(
+                                                            //               const Size(150, 50)),
+                                                            //       backgroundColor:
+                                                            //           MaterialStateProperty.all(
+                                                            //               Colors
+                                                            //                   .green.shade400),
+                                                            //       shape: MaterialStateProperty.all(
+                                                            //           RoundedRectangleBorder(
+                                                            //               borderRadius:
+                                                            //                   BorderRadius
+                                                            //                       .circular(
+                                                            //                           20)))),
+                                                            // );
                                                           }
                                                           
                                                         });
@@ -245,7 +245,7 @@ class _ProductDecreptionState extends State<ProductDecreption> {
                                                           ProductModel dummymodel = ProductModel(id: 1,product: ProductDummy(
                                                             rate: "60.00",
                                                             category: "Namkeen",
-                                                            image: d1.namkeen_chanajor,
+                                                            image: "https://firebasestorage.googleapis.com/v0/b/puneetshop-87ccf.appspot.com/o/Itemimages%2Fitems%2Fchakri%2F1%20chanajor.png?alt=media&token=a8c64598-c63a-464a-abbc-163e65c9aa43",
                                                             name: "Chana chor garam"
                                                           ));
                                                           print(dummymodel.toJson());

@@ -22,7 +22,7 @@ class _AddLocationState extends State<AddLocation> {
 
   void initState() {
     // isButton = false;
-    address();
+    getaddress();
     // pickImage();
 
   }
@@ -36,59 +36,61 @@ class _AddLocationState extends State<AddLocation> {
         backgroundColor: Colors.amber.shade300,
         title: Text("Your Address",style: TextStyle(color: Colors.black87),),
         iconTheme: IconThemeData(color: Colors.black),),
-      body: Container(
-        height: height,
-        width: width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-          child: Column(
-            children: [
-              Container(
-                // padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                width: width*1,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 5),
-                  borderRadius: BorderRadius.circular(15)
+      body: SafeArea(
+        child: Container(
+          height: height,
+          width: width,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            child: Column(
+              children: [
+                Container(
+                  // padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                  width: width*1,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 5),
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Column(
+                    children: [
+                      Text(loc1,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
+                      SizedBox(height: height * 0.02,),
+                      Text(loc2,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
+                      SizedBox(height: height * 0.02,),
+                      Text(loc3,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
+                      SizedBox(height: height * 0.02,),
+                      Text(loc4,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
+                      SizedBox(height: height * 0.02,),
+                      Text(loc5,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
+                      SizedBox(height: height * 0.02,),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    Text(loc1,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
-                    SizedBox(height: height * 0.02,),
-                    Text(loc2,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
-                    SizedBox(height: height * 0.02,),
-                    Text(loc3,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
-                    SizedBox(height: height * 0.02,),
-                    Text(loc4,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
-                    SizedBox(height: height * 0.02,),
-                    Text(loc5,style: TextStyle(fontSize: 10,color: Colors.grey.shade500),),
-                    SizedBox(height: height * 0.02,),
-                  ],
+                SizedBox(
+                  height: height*0.02,
                 ),
-              ),
-              SizedBox(
-                height: height*0.02,
-              ),
-              ElevatedButton(onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddAddress()),
-                );
-              }, 
-              child: Text("Add new address"))
-            ],
+                ElevatedButton(onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddAddress()),
+                  );
+                }, 
+                child: Text("Add new address"))
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Future <void> address () async {
+  Future <void> getaddress () async {
     try {
       final user = auth.currentUser!.uid;
-      print(user);
+      // print(user);
       final DocumentSnapshot snapshot = await FirebaseFirestore
         .instance
-        .collection('user-addresses')
+        .collection("user-addresses")
         .doc(user)
         .collection('address')
         .doc(uid)

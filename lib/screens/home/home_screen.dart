@@ -154,6 +154,16 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: height * 0.04,
             ),
+            // Container(
+            //       decoration: BoxDecoration(
+            //       image : DecorationImage(image: NetworkImage(photo),fit: BoxFit.cover),
+            //       borderRadius: BorderRadius.circular(50)
+            //       ),
+            //       height: 100,
+            //       width: 100,
+            //       // child: Image.network(photo,fit: BoxFit.fill,)
+            //       ),
+            // 
             CircleAvatar(
               child: ClipOval(
                 child: Container(

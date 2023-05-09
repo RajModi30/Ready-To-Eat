@@ -258,7 +258,7 @@ class _AddAddressState extends State<AddAddress> {
         'createdAt': Timestamp.now()                                                      
       },);
       Fluttertoast.showToast(
-        msg: "Address Successfully Added",
+        msg: "Address Added Successfully",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.grey.shade600,

@@ -271,7 +271,7 @@ class _MyLoginState extends State<MyLogin> {
         );
 
         Timer(
-            Duration(seconds: 3),
+            Duration(seconds: 2),
         
             () => Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: ((context) => HomeScreen()))));
